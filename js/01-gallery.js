@@ -26,29 +26,18 @@ function onGalleryContainerClick(event){
     const imageItem = document.querySelector(".gallery__image");
     event.preventDefault();
     console.log(imageItem.dataset.source);
-// console.log(event.target.dataset.source);
+console.log(event.target);
 
     if (event.target.nodeName !== 'IMG') {
         return;
     }
 }
-// const onGalleryClick = event => {
-//   event.preventDefault();
-//   if (event.target.nodeName !== 'IMG') {
-//     return;
-//   }
-
-  const closeModal = event => {
-    if (event.code === 'Escape') {
-      instance.close();
-    }
-  };
 
   const instance = basicLightbox.create(
-    `<img src="${event.target.dataset.source}" width="800" height="600">`,
+    `<img src="${imageItem.dataset.source}" width="800" height="600">`,
     {
       onShow: instance => {
-        window.addEventListener('keydown', closeModal);
+        window.addEventListener('keydown', openModal);
       },
       onClose: instance => {
         window.removeEventListener('keydown', closeModal);
@@ -57,7 +46,11 @@ function onGalleryContainerClick(event){
   );
 
   instance.show();
-
+  const closeModal = event => {
+    if (event.code === 'Escape') {
+      instance.close();
+    }
+  };
 
 // renderGalleryToHTML(galleryItems);
 
