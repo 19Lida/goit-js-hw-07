@@ -31,30 +31,30 @@ console.log(event.target);
     if (event.target.nodeName !== 'IMG') {
         return;
     }
+
+    // Відкриття і закриття модалки по Escape
+    const closeModal = event => {
+      if (event.code === 'Escape') {
+        instance.close();
+      }
 }
+    
+    const instance = basicLightbox.create(
+      `<img src="${event.target.dataset.source}" width="800" height="600">`,
+      {
+        onShow: instance => {
+          window.addEventListener('keydown', closeModal);
+        },
+        onClose: instance => {
+          window.removeEventListener('keydown', closeModal);
+        },
+      }
+    );
+  
+    instance.show();
 
-  const instance = basicLightbox.create(
-    `<img src="${imageItem.dataset.source}" width="800" height="600">`,
-    {
-      onShow: instance => {
-        window.addEventListener('keydown', openModal);
-      },
-      onClose: instance => {
-        window.removeEventListener('keydown', closeModal);
-      },
-    }
-  );
+};
 
-  instance.show();
-  const closeModal = event => {
-    if (event.code === 'Escape') {
-      instance.close();
-    }
-  };
-
-// renderGalleryToHTML(galleryItems);
-
-// galleryRef.addEventListener('click', onGalleryClick);
 
 
 
